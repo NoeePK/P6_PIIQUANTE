@@ -10,20 +10,20 @@ const sauceCtrl = require('../controllers/sauce');
 
 // *****************************************
 
-// Création d'une sauce
-router.post('/', auth, multer, sauceCtrl.createSauce);
-
-// Modification d'une sauce
-router.put('/:id', auth, sauceCtrl.modifySauce);
-
-// Suppression d'une sauce
-router.delete('/:id', auth, sauceCtrl.deleteSauce);
+// Récupération de toutes les sauces
+router.get('/', auth, sauceCtrl.getAllSauces);
 
 // Récupération d'une sauce
 router.get('/:id', auth, sauceCtrl.getOneSauce);
 
-// Récupération de toutes les sauces
-router.get('/', auth, sauceCtrl.getAllSauces);
+// Création d'une sauce
+router.post('/', auth, multer, sauceCtrl.createSauce);
+
+// Modification d'une sauce
+router.put('/:id', auth, multer, sauceCtrl.modifySauce);
+
+// Suppression d'une sauce
+router.delete('/:id', auth, sauceCtrl.deleteSauce);
 
 // Système de likes/dislikes
 router.post('/:id/like', auth, sauceCtrl.voteForSauce);

@@ -10,10 +10,15 @@ module.exports = (req, res, next) => {
         const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
         // Vérifier id lié au token
         const userId = decodedToken.userId;
-        req.auth = {
-            userId: userId
-        };
-        next();
+        // SI : ID n'est pas valable
+        if (req.body.userId && req.body.userId !== userId) {
+            throw 'User ID non valable'
+        }
+        // SINON : ID est valable
+        else {
+            next();
+        }
+        // La requête n'est pas authentifiée 
     } catch (error) {
         res.status(401).json({ error });
     }

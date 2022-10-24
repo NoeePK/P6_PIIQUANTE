@@ -1,6 +1,5 @@
 // Version stable par Will Alexander : refaire de zéro ou possible de garder ?
 
-const { Console } = require('console');
 const http = require('http');
 const app = require('./app');
 
@@ -18,7 +17,7 @@ const normalizePort = val => {
 };
 
 // Port 3000 s'il n'y a pas d'autre port
-const port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT ||'3000');
 app.set('port', port);
 
 // Gérer les erreurs
