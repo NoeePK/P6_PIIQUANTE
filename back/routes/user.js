@@ -5,8 +5,6 @@ const router = express.Router();
 // Importer les contrôleurs
 const userCtrl = require('../controllers/user');
 
-
-// Il faut que le point d'accès continne aussi "auth"???
 // Créer un nouvel utilisateur
 router.post('/signup', userCtrl.signup);
 // Connecter un utilisateur
