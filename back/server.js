@@ -1,5 +1,3 @@
-// Version stable par Will Alexander : refaire de zéro ou possible de garder ?
-
 const http = require('http');
 const app = require('./app');
 

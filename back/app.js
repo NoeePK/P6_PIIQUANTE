@@ -1,17 +1,17 @@
 // Importer les modules et plugins :
 const express = require('express');
+const app = express();
 const mongoose = require('mongoose');
 const path = require('path');
-// Essai :
-let cors = require('cors')
-app.use(cors())
+const cors = require("cors");
+app.use(cors({
+    origin: '*',
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+}))
 
 // Déclarer les routes
 const sauceRoutes = require('./routes/sauce')
 const userRoutes = require('./routes/user');
-
-// Framework utilisé par l'application 
-const app = express();
 
 // Connexion à la base de données
 mongoose.connect("mongodb+srv://NPK:aUl4B4Fs2iPnSUhx@piiquante.r5oxctm.mongodb.net/?retryWrites=true&w=majority", {

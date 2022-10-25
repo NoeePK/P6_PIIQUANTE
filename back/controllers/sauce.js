@@ -32,7 +32,6 @@ exports.createSauce = (req, res, next) => {
     const sauceObject = JSON.parse(req.body.sauce);
     // Supprimer id en surplus
     delete sauceObject._id;
-    delete sauceObject._userId;
     // Créer une sauce
     const sauce = new Sauce({
         ...sauceObject,
@@ -78,7 +77,6 @@ exports.modifySauce = (req, res, next) => {
         .catch((error) => res.status(400).json({ error }));
 };
 
-
 // *****************************************
 // Suppression d'une sauce
 // *****************************************
@@ -107,13 +105,13 @@ exports.deleteSauce = (req, res, next) => {
         );
 };
 
-
-
-
+// *****************************************
+// Système de vote
+// *****************************************
 
 // WIP : système de likes
 exports.voteForSauce = (req, res, next) => {
-// SI user likes sauce ALORS ajout un like dans tableau usersLikes
-// SINON SI user dislikes sauce ALORS ajout 1 dislike dans le tableau usersDislike
-// SINON user supprime son vote ALORS vérifier userId et faire -1 dans le tableau correspondant
+    // SI user likes sauce ALORS ajout un like dans tableau usersLikes
+    // SINON SI user dislikes sauce ALORS ajout 1 dislike dans le tableau usersDislike
+    // SINON user supprime son vote ALORS vérifier userId et faire -1 dans le tableau correspondant
 };

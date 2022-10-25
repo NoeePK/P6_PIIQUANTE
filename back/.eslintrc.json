@@ -7,14 +7,14 @@
     },
     "globals": {
         "require": true,
-        "process": true
+        "process": true,
+        "next": true
     },
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended"
     ],
-    "overrides": [
-    ],
+    "overrides": [],
     "parserOptions": {
         "ecmaVersion": "latest",
         "sourceType": "module"
@@ -23,5 +23,6 @@
         "react"
     ],
     "rules": {
+        "no-unused-vars": "off"
     }
 }
