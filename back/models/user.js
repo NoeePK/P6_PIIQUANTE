@@ -1,4 +1,3 @@
-// Importer mongoose et plugin
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
@@ -9,7 +8,7 @@ const userSchema = mongoose.Schema({
 });
 // !!!! WIP : vérifier si adresse mail valide comme pour p5???
 
-// Appliquer plugin pour empêcher l'utilisation du même email
+// Empêcher l'utilisation du même email
 userSchema.plugin(uniqueValidator);
 
 // Exporter le schema

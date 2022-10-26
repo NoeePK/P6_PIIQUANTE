@@ -1,11 +1,9 @@
-// Importer express
 const express = require('express');
-// Créer router
 const router = express.Router();
-// Importer les middlewares
+
 const auth = require('../middleware/auth');
 const multer = require('../middleware/multer-config');
-// Importer les contrôleurs
+
 const sauceCtrl = require('../controllers/sauce');
 
 // *****************************************

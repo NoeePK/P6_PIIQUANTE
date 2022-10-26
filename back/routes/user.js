@@ -1,6 +1,4 @@
-// Importer express
 const express = require('express');
-// Créer router
 const router = express.Router();
 // Importer les contrôleurs
 const userCtrl = require('../controllers/user');

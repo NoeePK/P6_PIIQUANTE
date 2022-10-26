@@ -1,13 +1,14 @@
 // Importer les modules et plugins :
 const express = require('express');
-const app = express();
-const mongoose = require('mongoose');
+// const cors = require("cors");
 const path = require('path');
-const cors = require("cors");
-app.use(cors({
-    origin: '*',
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
-}))
+const mongoose = require('mongoose');
+const app = express();
+
+// app.use(cors({
+//     origin: '*',
+//     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+// }))
 
 // Déclarer les routes
 const sauceRoutes = require('./routes/sauce')
@@ -32,9 +33,9 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 // Routes sauces, utilisateurs et images
-app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/sauce', sauceRoutes);
 app.use('/api/auth', userRoutes);
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 // Exporter l'application
 module.exports = app;

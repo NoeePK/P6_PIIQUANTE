@@ -11,7 +11,7 @@ const ModelsSauce = mongoose.Schema({
     imageUrl: { type: String, required: true },
     heat: { type: Number, required: true },
     likes: { type: Number, default: 0 },
-    dislikes: { type: Number , default: 0 },
+    dislikes: { type: Number, default: 0 },
     // !!! WIP !!!
     usersLiked: { type: ["String <userId>"] },
     usersDisliked: { type: ["String <userId>"] }
