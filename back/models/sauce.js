@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 
 // Créer un schema sauce
-const ModelsSauce = mongoose.Schema({
+const sauceSchema = mongoose.Schema({
     userId: { type: String, required: true },
     name: { type: String, required: true },
     manufacturer: { type: String, required: true },
@@ -13,9 +13,9 @@ const ModelsSauce = mongoose.Schema({
     likes: { type: Number, default: 0 },
     dislikes: { type: Number, default: 0 },
     // !!! WIP !!!
-    usersLiked: { type: ["String <userId>"] },
-    usersDisliked: { type: ["String <userId>"] }
+    usersLiked: { type: ["String"] },
+    usersDisliked: { type: ["String"] }
 });
 
 // Exporter le schema
-module.exports = mongoose.model('Sauce', ModelsSauce);
+module.exports = mongoose.model('Sauce', sauceSchema);

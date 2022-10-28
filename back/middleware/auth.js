@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
         const userId = decodedToken.userId;
         // SI : ID n'est pas valable
         if (req.body.userId && req.body.userId !== userId) {
-            throw 'User ID non valable'
+            throw 'User ID non valable';
         }
         // SINON : ID est valable
         else {

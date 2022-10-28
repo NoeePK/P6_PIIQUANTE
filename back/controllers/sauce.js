@@ -35,13 +35,13 @@ exports.createSauce = (req, res, next) => {
     // Créer une sauce
     const sauce = new Sauce({
         ...sauceObject,
-        userId: req.auth.userId,
+        // userId: req.auth.userId,
         // Générer une URL pour l'image
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     });
     // Sauvegarder la sauce
     sauce.save()
-        .then(() => { res.status(201).json({ message: 'Sauce enregistrée avec succès' }) })
+        .then(() => { res.status(201).json({ message: 'Sauce enregistrée avec succès' })})
         .catch(error => res.status(400).json({ error }));
 };
 
