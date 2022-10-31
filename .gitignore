@@ -7,6 +7,7 @@
 /bazel-out
 
 /images
+images
 
 # Node
 /node_modules
