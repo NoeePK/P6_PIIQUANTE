@@ -1,8 +1,9 @@
 // Importer les modules et plugins :
 const express = require('express');
 const cors = require('cors');
-const path = require('path');
 const mongoose = require('mongoose');
+const path = require('path');
+const helmet = require('helmet');
 
 // Déclarer les routes
 const sauceRoutes = require('./routes/sauce')
@@ -17,6 +18,7 @@ mongoose.connect("mongodb+srv://NPK:aUl4B4Fs2iPnSUhx@piiquante.r5oxctm.mongodb.n
     .catch(() => console.log('Connexion à MongoDB : FAIL'))
 
 const app = express();
+app.use(helmet());
 
 // Contourner les systèmes de sécurité CORS
 app.use(cors({
@@ -31,6 +33,4 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/sauces', sauceRoutes);
 app.use('/api/auth', userRoutes);
 
-
-// Exporter l'application
 module.exports = app;

@@ -5,6 +5,8 @@ const sauceCtrl = require('../controllers/sauce');
 const auth = require('../middleware/auth');
 const multer = require('../middleware/multer-config');
 
+// Empêcher le spam de nouvelles sauces par des bots
+const slowDown = require('../middleware/rateLimiter');
 
 
 // *****************************************
@@ -16,10 +18,10 @@ router.get('/', auth, sauceCtrl.getAllSauces);
 router.get('/:id', auth, sauceCtrl.getOneSauce);
 
 // Création d'une sauce
-router.post('/', auth, multer, sauceCtrl.createSauce);
+router.post('/', auth, slowDown.speedLimiter, multer, sauceCtrl.createSauce);
 
 // Modification d'une sauce
-router.put('/:id', auth, multer, sauceCtrl.modifySauce);
+router.put('/:id', auth, slowDown.speedLimiter, multer, sauceCtrl.modifySauce);
 
 // Suppression d'une sauce
 router.delete('/:id', auth, sauceCtrl.deleteSauce);
