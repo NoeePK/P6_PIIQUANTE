@@ -4,8 +4,6 @@ const router = express.Router();
 const sauceCtrl = require('../controllers/sauce');
 const auth = require('../middleware/auth');
 const multer = require('../middleware/multer-config');
-
-// Empêcher le spam de nouvelles sauces par des bots
 const slowDown = require('../middleware/rateLimiter');
 
 

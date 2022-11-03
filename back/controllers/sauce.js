@@ -33,7 +33,6 @@ exports.createSauce = (req, res, next) => {
     // Créer une sauce
     const sauce = new Sauce({
         ...sauceObject,
-        // userId: req.auth.userId,
         // Générer une URL pour l'image
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     });

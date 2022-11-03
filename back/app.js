@@ -9,6 +9,9 @@ const helmet = require('helmet');
 const sauceRoutes = require('./routes/sauce')
 const userRoutes = require('./routes/user');
 
+const app = express();
+app.use(helmet());
+
 // Connexion à la base de données
 mongoose.connect("mongodb+srv://NPK:aUl4B4Fs2iPnSUhx@piiquante.r5oxctm.mongodb.net/?retryWrites=true&w=majority", {
     useNewUrlParser: true,
@@ -16,9 +19,6 @@ mongoose.connect("mongodb+srv://NPK:aUl4B4Fs2iPnSUhx@piiquante.r5oxctm.mongodb.n
 })
     .then(() => console.log('Connexion à MongoDB : OK'))
     .catch(() => console.log('Connexion à MongoDB : FAIL'))
-
-const app = express();
-app.use(helmet());
 
 // Contourner les systèmes de sécurité CORS
 app.use(cors({
