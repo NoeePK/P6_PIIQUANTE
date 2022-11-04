@@ -11,6 +11,7 @@ const userRoutes = require('./routes/user');
 
 const app = express();
 app.use(helmet());
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 
 // Connexion à la base de données
 mongoose.connect("mongodb+srv://NPK:aUl4B4Fs2iPnSUhx@piiquante.r5oxctm.mongodb.net/?retryWrites=true&w=majority", {
