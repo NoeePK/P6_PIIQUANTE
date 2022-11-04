@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const userCtrl = require('../controllers/user');
-const attempts = require('../middleware/rateLimiter');
+const attempts = require('../middleware/limiter');
 
 // Créer un nouvel utilisateur
 router.post('/signup', userCtrl.signup);
