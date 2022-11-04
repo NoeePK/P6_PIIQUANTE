@@ -6,7 +6,6 @@ const auth = require('../middleware/auth');
 const multer = require('../middleware/multer-config');
 const slowDown = require('../middleware/limiter');
 
-
 // *****************************************
 
 // Récupération de toutes les sauces
@@ -27,5 +26,4 @@ router.delete('/:id', auth, sauceCtrl.deleteSauce);
 // Système de likes/dislikes
 router.post('/:id/like', auth, sauceCtrl.voteForSauce);
 
-// Exporter le router
 module.exports = router;

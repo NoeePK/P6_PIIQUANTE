@@ -63,24 +63,18 @@ exports.modifySauce = (req, res, next) => {
 // *****************************************
 
 exports.deleteSauce = (req, res, next) => {
+    // SI : user a créée cette sauce
     Sauce.findOne({ _id: req.params.id })
         .then(sauce => {
-            // SI : id actuel n'est pas l'id du créateur
-            if (sauce.userId != req.auth.userId) {
-                // ALORS : erreur et accès refusé
-                res.status(401).json({ message: "Vous n'avez pas l'autorisation nécessaire pour supprimer cette sauce" })
-            }
-            // SINON : id actuel = id créateur
-            else {
-                // ALORS : supprimer image de BDD
-                const filename = sauce.imageUrl.split('/images/')[1];
-                fs.unlink(`images/${filename}`, () => {
-                    // Supprimer sauce de la BDD
-                    Sauce.deleteOne({ _id: req.params.id })
-                        .then(() => res.status(200).json({ message: 'Sauce supprimée avec succès' }))
-                        .catch(error => res.status(401).json({ error }))
-                });
-            }
+            const filename = sauce.imageUrl.split('/images/')[1];
+            // Supprimer l'image
+            fs.unlink(`images/${filename}`, () => {
+                // Supprimer la sauce
+                Sauce.deleteOne({ _id: req.params.id })
+                    .then(() => res.status(200).json({ message: 'Sauce supprimée avec succès' }))
+                    .catch(error => res.status(401).json({ message: "Vous n'avez pas l'autorisation nécessaire pour supprimer cette sauce" }))
+            });
+
         })
         .catch(error => res.status(500).json({ error })
         );
