@@ -8,6 +8,8 @@ const MIME_TYPES = {
   'image/png': 'png'
 };
 
+// TROUVER : Mettre taille maximale !!!
+
 // Indiquer où enregistrer les images
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
