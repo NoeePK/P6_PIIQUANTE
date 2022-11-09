@@ -1,8 +1,8 @@
-const uniqueValidator = require('mongoose-unique-validator');
-
-const { validationResult } = require('express-validator');
 const mongoose = require('mongoose');
-const {uniqueEmail, strongPassword, validation} = require('../middleware/validators');
+const uniqueValidator = require('mongoose-unique-validator');
+const validator = require('express-validator');
+
+// const {strongPassword, validation} = require('../middleware/validators');
 
 // Créer un schema utilisateur
 const userSchema = mongoose.Schema({
@@ -24,8 +24,7 @@ const userSchema = mongoose.Schema({
     }
 });
 
-// // Empêcher l'utilisation du même email
-// userSchema.plugin(uniqueEmail.uniqueValidator);
+// Empêcher l'utilisation du même email
 userSchema.plugin(uniqueValidator)
 
 module.exports = mongoose.model('User', userSchema);

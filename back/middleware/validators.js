@@ -1,21 +1,21 @@
-// Email unique
-const uniqueValidator = require('mongoose-unique-validator');
+
 // Validation email et mot de passe
-const { validator } = require('express-validator');
-const { checkPassword, checkEmail } = require('express-validator/check');
+const validator = require('express-validator');
+const checkEmail = require('express-validator/checkEmail');
+const checkPassword = require('express-validator/checkPassword');
 
 const validation = [
     checkEmail('email')
-    .exists()
-    .withMessage('Veuillez entrer une adresse mail')
-    .isEmail()
-    .withMessage('Veuillez entrer une adresse mail valide'),
-    
+        .exists()
+        .withMessage('Veuillez entrer une adresse mail')
+        .isEmail()
+        .withMessage('Veuillez entrer une adresse mail valide'),
+
     checkPassword('password')
-    .exists()
-    .isLength({ min: 5 })
+        .exists()
+        .isLength({ min: 5 })
 
 ]
 
 
-module.exports = { uniqueValidator, validator, validation, checkPassword, checkEmail }
+module.exports = { validator, validation, checkPassword, checkEmail };
