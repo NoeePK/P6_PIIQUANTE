@@ -1,9 +1,11 @@
+const mongoose = require('mongoose');
+
 // Créer un schema mot de passe
 const passwordValidator = require('password-validator');
 
-const passwordSchema = new passwordValidator();
+const validPassword = new passwordValidator();
 // Propriétés du mot de passe
-passwordSchema
+validPassword
     .is().min(8)
     .is().max(100)
     .has().uppercase()
@@ -26,6 +28,14 @@ console.log(passwordSchema.validate('joke', { list: true }));
 
 // Créer schema email
 
+const passwordSchema = mongoose.Schema({
+    type: String,
+    required: true,
+    validPassword: true,
+    message: "Votre mot de passe doit contenir : 1 majuscule, 1 minuscule, 1 nombre et 1 caractère spécial.",
+})
+
+
 const emailValidator = require('express-validator');
 const emailSchema = new emailValidator();
 
@@ -34,3 +44,5 @@ emailSchema
     .withMessage('Veuillez entrer une adresse mail')
     .isEmail()
     .withMessage('Veuillez entrer une adresse mail valide')
+
+module.exports = mongoose.model('Password', passwordSchema);
