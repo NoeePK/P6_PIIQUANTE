@@ -1,6 +1,6 @@
 
 // Validation email et mot de passe
-const validator = require('express-validator');
+
 const checkEmail = require('express-validator/checkEmail');
 const checkPassword = require('express-validator/checkPassword');
 
@@ -18,4 +18,4 @@ const validation = [
 ]
 
 
-module.exports = { validator, validation, checkPassword, checkEmail };
+module.exports = { validation, checkPassword, checkEmail };

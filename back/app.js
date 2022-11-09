@@ -9,6 +9,9 @@ const helmet = require('helmet');
 const sauceRoutes = require('./routes/sauce')
 const userRoutes = require('./routes/user');
 
+require('dotenv').config();
+console.log(process.env);
+
 const app = express();
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
