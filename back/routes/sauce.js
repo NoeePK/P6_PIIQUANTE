@@ -15,7 +15,7 @@ router.get('/', auth, sauceCtrl.getAllSauces);
 router.get('/:id', auth, sauceCtrl.getOneSauce);
 
 // Création d'une sauce
-router.post('/', auth, slowDown, multer, sauceCtrl.createSauce);
+router.post('/', auth, multer, sauceCtrl.createSauce);
 
 // Modification d'une sauce
 router.put('/:id', auth, multer, sauceCtrl.modifySauce);

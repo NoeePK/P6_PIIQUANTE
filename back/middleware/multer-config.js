@@ -31,8 +31,6 @@ app.use(function (err, req, res, next) {
 })
 // TROUVER : Mettre taille maximale !!!
 
-
-
 // Indiquer où enregistrer les images
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
@@ -49,5 +47,4 @@ const storage = multer.diskStorage({
   }
 });
 
-// Exporter le module
 module.exports = multer({ storage }).single('image');

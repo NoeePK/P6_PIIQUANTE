@@ -7,6 +7,6 @@ const maxAttempts = require('../middleware/maxLogin');
 // Créer un nouvel utilisateur
 router.post('/signup', strongPassword, userCtrl.signup);
 // Connecter un utilisateur
-router.post('/login', maxAttempts, userCtrl.login);
+router.post('/login', userCtrl.login);
 
 module.exports = router;
