@@ -1,4 +1,3 @@
-// Importer mongoose
 const mongoose = require('mongoose');
 
 // Créer un schema sauce
@@ -16,5 +15,4 @@ const sauceSchema = mongoose.Schema({
     usersDisliked: { type: [String] }
 });
 
-// Exporter le schema
 module.exports = mongoose.model('Sauce', sauceSchema);

@@ -1,22 +1,25 @@
-// Hasher le mot de passe
 const bcrypt = require('bcrypt');
-// Attribuer le token
-const jwt = require('jsonwebtoken')
+const cryptoJS = require('crypto-js');
+const jwt = require('jsonwebtoken');
+const User = require('../models/user');
 
-// Récupérer le modèle utilisateur
-const User = require('../models/User');
+const dotenv = require('dotenv');
+const result = dotenv.config();
 
 // *****************************************
 // Inscription d'un utilisateur
 // *****************************************
 exports.signup = (req, res, next) => {
-    // Crypter le mot de passe
-    bcrypt.hash(req.body.password, 10)
+    // Chiffrer l'email
+    const emailCryptoJS = cryptoJS.HmacSHA256(req.body.email, `${process.env.CRYPTO_EMAIL}`).toString();
+    // Hasher le mot de passe
+    bcrypt
+        .hash(req.body.password, 10)
         // Récupérer mot de passe crypté
         .then(hash => {
             // Création du nouvel utilisateur
             const user = new User({
-                email: req.body.email,
+                email: emailCryptoJS,
                 password: hash
             });
             // Enregistrer l'utilisateur dans BDD
@@ -31,37 +34,42 @@ exports.signup = (req, res, next) => {
 // Connexion d'un utilisateur
 // *****************************************
 exports.login = (req, res, next) => {
+    // Chiffrer l'email
+    const emailCryptoJS = cryptoJS
+        .HmacSHA256(req.body.email, `${process.env.CRYPTO_EMAIL}`)
+        .toString();
+
     // Récupérer utilisateur correspondant à l'adresse mail
-    User.findOne({ email: req.body.email })
-        .then(user => {
-            // SI : aucun utilisateur trouvé pour ce mail
-            if (user === null) {
-                res.status(401).json({ message: 'Paire identifiant/mot de passe incorrecte' });
+    User.findOne({ email: emailCryptoJS })
+        // SI : email n'existe pas
+        .then((user) => {
+            if (!user) {
+                return res.status(401).json({ error: "Utilisateur inexistant" })
             }
-            // SINON : utilisateur trouvé pour ce mail
+            // SINON : email existe
             else {
                 // Comparer mot de passe et le hash dans la BDD
-                bcrypt.compare(req.body.password, user.password)
-                    .then(valid => {
-                        // SI : Mot de passe incorrect
-                        if (!valid) {
-                            res.status(401).json({ message: 'Paire identifiant/mot de passe incorrecte' })
+                bcrypt
+                    .compare(req.body.password, user.password)
+                    .then((validPassword) => {
+                        // SI : Mot de passe est incorrect
+                        if (!validPassword) {
+                            return res.status(401).json({ message: 'Paire identifiant/mot de passe incorrecte' })
                         }
-                        // SINON : Mot de passe correct
+                        // SINON : Mot de passe est correct
                         else {
                             // ALORS : autoriser l'accès et donner un token
                             res.status(200).json({
                                 userId: user._id,
                                 token: jwt.sign(
                                     { userId: user._id },
-                                    'RANDOM_TOKEN_SECRET',
+                                    "RANDOM_TOKEN_SECRET",
                                     { expiresIn: '24h' }
                                 )
                             });
                         }
                     })
-                    .catch(error => res.status(500).json({ error }));
             }
         })
-        .catch(error => res.status(500).json({ error }))
-};
+        .catch((error) => res.status(500).json({ error }));
+}
