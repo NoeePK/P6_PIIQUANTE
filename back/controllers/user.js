@@ -1,22 +1,32 @@
 // Hasher le mot de passe
 const bcrypt = require('bcrypt');
+
+// Chiffrer l'email
+const cryptoJS = require('crypto-js');
+
 // Attribuer le token
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 
 // Récupérer le modèle utilisateur
 const User = require('../models/User');
+
+const dotenv = require('dotenv');
+const result = dotenv.config();
 
 // *****************************************
 // Inscription d'un utilisateur
 // *****************************************
 exports.signup = (req, res, next) => {
-    // Crypter le mot de passe
-    bcrypt.hash(req.body.password, 10)
+    // Chiffrer l'email
+    const emailCryptoJS = cryptoJS.HmacSHA256(req.body.email, `${process.env.CRYPTO_EMAIL}`).toString();
+    // Hasher le mot de passe
+    bcrypt
+        .hash(req.body.password, 10)
         // Récupérer mot de passe crypté
         .then(hash => {
             // Création du nouvel utilisateur
             const user = new User({
-                email: req.body.email,
+                email: emailCryptoJS,
                 password: hash
             });
             // Enregistrer l'utilisateur dans BDD

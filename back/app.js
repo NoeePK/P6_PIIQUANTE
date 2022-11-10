@@ -5,7 +5,7 @@ const mongoose = require('./db');
 const path = require('path');
 const helmet = require('helmet');
 
-// Déclarer les routes
+// Importer les routes
 const sauceRoutes = require('./routes/sauce')
 const userRoutes = require('./routes/user');
 

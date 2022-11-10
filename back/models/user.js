@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
-// Créer un schema utilisateur
+// Enregistrer un nouvel utilisateur
 const userSchema = mongoose.Schema({
     email: {
         type: String,
