@@ -86,10 +86,6 @@ exports.deleteSauce = (req, res, next) => {
 
 // WIP : système de likes
 exports.voteForSauce = (req, res, next) => {
-    // SI user likes sauce ALORS ajout un like dans tableau usersLikes
-    // SINON SI user dislikes sauce ALORS ajout 1 dislike dans le tableau usersDislike
-    // SINON user supprime son vote ALORS vérifier userId et faire -1 dans le tableau correspondant
-
     // SI : User aime la sauce
     if (req.body.like === 1) {
         // ALORS : + 1 dans le tableau usersLiked
