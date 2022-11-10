@@ -1,7 +1,7 @@
 // Importer les modules et plugins :
 const express = require('express');
 const cors = require('cors');
-const mongoose = require('mongoose');
+const mongoose = require('./db');
 const path = require('path');
 const helmet = require('helmet');
 
@@ -9,20 +9,13 @@ const helmet = require('helmet');
 const sauceRoutes = require('./routes/sauce')
 const userRoutes = require('./routes/user');
 
+// Environnement
 require('dotenv').config();
 console.log(process.env);
 
 const app = express();
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
-
-// Connexion à la base de données
-mongoose.connect("mongodb+srv://NPK:aUl4B4Fs2iPnSUhx@piiquante.r5oxctm.mongodb.net/?retryWrites=true&w=majority", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-    .then(() => console.log('Connexion à MongoDB : OK'))
-    .catch(() => console.log('Connexion à MongoDB : FAIL'))
 
 // Contourner les systèmes de sécurité CORS
 app.use(cors({
