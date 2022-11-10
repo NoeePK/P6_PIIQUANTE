@@ -14,6 +14,11 @@ require('dotenv').config();
 console.log(process.env);
 
 const app = express();
+
+// Débug
+mongoose.set('debug', true);
+
+// Sécurité
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 

@@ -14,7 +14,6 @@ const userSchema = mongoose.Schema({
     }
 });
 
-
 // Empêcher l'utilisation du même email
 userSchema.plugin(uniqueValidator)
 

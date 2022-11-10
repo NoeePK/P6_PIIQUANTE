@@ -4,7 +4,7 @@ const router = express.Router();
 const sauceCtrl = require('../controllers/sauce');
 const auth = require('../middleware/auth');
 const multer = require('../middleware/multer-config');
-const slowDown = require('../middleware/limiter');
+const slowDown = require('../middleware/speedLimiter');
 
 // *****************************************
 
