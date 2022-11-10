@@ -41,37 +41,43 @@ exports.signup = (req, res, next) => {
 // Connexion d'un utilisateur
 // *****************************************
 exports.login = (req, res, next) => {
+    // Chiffrer l'email
+    const emailCryptoJS = cryptoJS
+        .HmacSHA256(req.body.email, `${process.env.CRYPTO_EMAIL}`)
+        .toString();
+
     // Récupérer utilisateur correspondant à l'adresse mail
-    User.findOne({ email: req.body.email })
-        .then(user => {
-            // SI : aucun utilisateur trouvé pour ce mail
-            if (user === null) {
-                res.status(401).json({ message: 'Paire identifiant/mot de passe incorrecte' });
+    User.findOne({ email: emailCryptoJS })
+        // SI : email n'existe pas
+        .then((user) => {
+            if (!user) {
+                return res.status(401).json({ error: "Utilisateur inexistant" })
             }
-            // SINON : utilisateur trouvé pour ce mail
+            // SINON : email existe
             else {
                 // Comparer mot de passe et le hash dans la BDD
-                bcrypt.compare(req.body.password, user.password)
-                    .then(valid => {
-                        // SI : Mot de passe incorrect
-                        if (!valid) {
-                            res.status(401).json({ message: 'Paire identifiant/mot de passe incorrecte' })
+                bcrypt
+                    .compare(req.body.password, user.password)
+                    .then((validPassword) => {
+                        // SI : Mot de passe est incorrect
+                        if (!validPassword) {
+                            return res.status(401).json({ message: 'Paire identifiant/mot de passe incorrecte' })
                         }
-                        // SINON : Mot de passe correct
+                        // SINON : Mot de passe est correct
                         else {
                             // ALORS : autoriser l'accès et donner un token
                             res.status(200).json({
                                 userId: user._id,
                                 token: jwt.sign(
                                     { userId: user._id },
-                                    'RANDOM_TOKEN_SECRET',
+                                    `${process.env.JWT_TOKEN}`,
                                     { expiresIn: '24h' }
                                 )
                             });
                         }
                     })
-                    .catch(error => res.status(500).json({ error }));
             }
+            res.status(200).json({ message: "Utilisateur existant" })
         })
-        .catch(error => res.status(500).json({ error }))
-};
+        .catch((error) => res.status(500).json({ error }));
+}
