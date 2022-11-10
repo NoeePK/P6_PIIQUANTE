@@ -15,10 +15,10 @@ router.get('/', auth, sauceCtrl.getAllSauces);
 router.get('/:id', auth, sauceCtrl.getOneSauce);
 
 // Création d'une sauce
-router.post('/', auth, slowDown.speedLimiter, multer, sauceCtrl.createSauce);
+router.post('/', auth, slowDown, multer, sauceCtrl.createSauce);
 
 // Modification d'une sauce
-router.put('/:id', auth, slowDown.speedLimiter, multer, sauceCtrl.modifySauce);
+router.put('/:id', auth, multer, sauceCtrl.modifySauce);
 
 // Suppression d'une sauce
 router.delete('/:id', auth, sauceCtrl.deleteSauce);

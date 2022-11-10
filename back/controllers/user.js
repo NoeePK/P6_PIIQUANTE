@@ -77,7 +77,6 @@ exports.login = (req, res, next) => {
                         }
                     })
             }
-            res.status(200).json({ message: "Utilisateur existant" })
         })
         .catch((error) => res.status(500).json({ error }));
 }
