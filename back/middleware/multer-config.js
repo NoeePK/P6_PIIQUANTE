@@ -1,8 +1,8 @@
-const express = require('express');
-const app = express();
-
 // Récupérer package pour gérer les images
 const multer = require('multer');
+
+const express = require('express');
+const app = express();
 
 // Définier format des images
 const MIME_TYPES = {
@@ -10,8 +10,6 @@ const MIME_TYPES = {
   'image/jpeg': 'jpg',
   'image/png': 'png'
 };
-
-
 
 // TROUVER : Mettre taille maximale !!!
 const maxSize = { fileSize: 1024 * 1024 * 1024 }
