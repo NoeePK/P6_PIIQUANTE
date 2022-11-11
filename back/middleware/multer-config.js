@@ -11,7 +11,7 @@ const MIME_TYPES = {
   'image/png': 'png'
 };
 
-// TROUVER : Mettre taille maximale !!!
+// TESTER
 const maxSize = { fileSize: 2000000 }
 const upload = multer({ limits: maxSize })
 
