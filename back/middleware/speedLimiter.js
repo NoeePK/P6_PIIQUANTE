@@ -1,10 +1,14 @@
 const slowDown = require('express-slow-down');
 
 // Limiter le spam de création de sauces
-const speedLimiter = slowDown({
+const speedLimit = slowDown({
     windowMs: 15 * 60 * 1000,
     delayAfter: 10,
-    delayMs: 500,
+    delayMs: 800,
 })
 
-module.exports = { speedLimiter }
+// Session : 15 minutes
+// Limite : 10 post
+// Delais : 800 ms 
+
+module.exports = speedLimit;

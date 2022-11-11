@@ -4,7 +4,8 @@ const rateLimiter = require('express-rate-limit');
 const rateLimit = rateLimiter({
     windowMs: 5 * 60 * 1000,
     max: 5,
+    standardHeaders: true,
     message: "Vous avez atteint la limite de tentatives de connexion autorisée."
 })
 
-module.exports = { rateLimit }
+module.exports = rateLimit;
