@@ -12,7 +12,7 @@ const MIME_TYPES = {
 };
 
 // TROUVER : Mettre taille maximale !!!
-const maxSize = { fileSize: 1024 * 1024 * 1024 }
+const maxSize = { fileSize: 2000000 }
 const upload = multer({ limits: maxSize })
 
 app.post('/upload', upload.single('file'), function (req, res) {
@@ -24,10 +24,8 @@ app.use(function (err, req, res, next) {
     res.send({ result: 'fail', error: { code: 1001, message: 'Fichier trop volumineux' } })
     return 
   }
-
-  // Handle any other errors
 })
-// TROUVER : Mettre taille maximale !!!
+
 
 // Indiquer où enregistrer les images
 const storage = multer.diskStorage({
