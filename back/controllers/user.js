@@ -11,7 +11,9 @@ const result = dotenv.config();
 // *****************************************
 exports.signup = (req, res, next) => {
     // Chiffrer l'email
-    const emailCryptoJS = cryptoJS.HmacSHA256(req.body.email, `${process.env.CRYPTO_EMAIL}`).toString();
+    const emailCryptoJS = cryptoJS
+    .HmacSHA256(req.body.email, `${process.env.CRYPTO_EMAIL}`)
+    .toString();
     // Hasher le mot de passe
     bcrypt
         .hash(req.body.password, 10)

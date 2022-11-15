@@ -6,8 +6,6 @@ const auth = require('../middleware/auth');
 const multer = require('../middleware/multer-config');
 const slowDown = require('../middleware/speedLimiter');
 
-// *****************************************
-
 // Récupération de toutes les sauces
 router.get('/', auth, sauceCtrl.getAllSauces);
 
