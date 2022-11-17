@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const userCtrl = require('../controllers/user');
+
+// Sécurité
 const strongPassword = require('../middleware/password')
 const maxLoginAttempts = require('../middleware/rateLimiter');
 const slowDown = require('../middleware/speedLimiter');

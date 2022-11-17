@@ -12,8 +12,8 @@ const result = dotenv.config();
 exports.signup = (req, res, next) => {
     // Chiffrer l'email
     const emailCryptoJS = cryptoJS
-    .HmacSHA256(req.body.email, `${process.env.CRYPTO_EMAIL}`)
-    .toString();
+        .HmacSHA256(req.body.email, `${process.env.CRYPTO_EMAIL}`)
+        .toString();
     // Hasher le mot de passe
     bcrypt
         .hash(req.body.password, 10)
@@ -60,7 +60,7 @@ exports.login = (req, res, next) => {
                         }
                         // SINON : Mot de passe est correct
                         else {
-                            // ALORS : autoriser l'accès et donner un token
+                            // ALORS : autoriser l'accès et attribuer un token
                             res.status(200).json({
                                 userId: user._id,
                                 token: jwt.sign(

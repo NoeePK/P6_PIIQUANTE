@@ -1,7 +1,7 @@
 // Importer les modules et plugins :
 const express = require('express');
 const cors = require('cors');
-const mongoose = require('./dataBase');
+
 const path = require('path');
 const helmet = require('helmet');
 
@@ -18,6 +18,9 @@ const app = express();
 // Sécurité
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
+
+// Connexion à la base de données
+const mongoose = require('./dataBase');
 
 // Contourner les systèmes de sécurité CORS
 app.use(cors({

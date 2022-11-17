@@ -1,31 +1,27 @@
-// Récupérer package pour gérer les images
 const multer = require('multer');
-
 const express = require('express');
 const app = express();
 
-// Définier format des images
+// Définir le format des images
 const MIME_TYPES = {
   'image/jpg': 'jpg',
   'image/jpeg': 'jpg',
   'image/png': 'png'
 };
 
-// TESTER
+// Définir la taille max des images
 const maxSize = { fileSize: 2000000 }
 const upload = multer({ limits: maxSize })
 
 app.post('/upload', upload.single('file'), function (req, res) {
   res.send({ result: 'ok' })
 })
-
 app.use(function (err, req, res, next) {
   if (err.code === 'LIMIT_FILE_SIZE') {
     res.send({ result: 'fail', error: { code: 1001, message: 'Fichier trop volumineux' } })
-    return 
+    return
   }
 })
-
 
 // Indiquer où enregistrer les images
 const storage = multer.diskStorage({
@@ -38,7 +34,7 @@ const storage = multer.diskStorage({
     const name = file.originalname.split(' ').join('_');
     // Ajouter extension adéquate
     const extension = MIME_TYPES[file.mimetype];
-    // Rendre nom unique avec timestamp, ajouter .extension
+    // Rendre nom unique avec timestamp
     callback(null, name + Date.now() + '.' + extension);
   }
 });

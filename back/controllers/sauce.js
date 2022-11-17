@@ -53,10 +53,12 @@ exports.modifySauce = (req, res, next) => {
             imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
         } : { ...req.body };
     Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
-        .then(() => res.status(200).json({ 
-            message: 'Sauce modifiée avec succès' }))
-        .catch(error => res.status(401).json({ 
-            message: "Vous n'avez pas l'autorisation nécessaire pour modifier cette sauce" }));
+        .then(() => res.status(200).json({
+            message: 'Sauce modifiée avec succès'
+        }))
+        .catch(error => res.status(401).json({
+            message: "Vous n'avez pas l'autorisation nécessaire pour modifier cette sauce"
+        }));
 
 };
 
@@ -65,7 +67,6 @@ exports.modifySauce = (req, res, next) => {
 // *****************************************
 
 exports.deleteSauce = (req, res, next) => {
-    // SI : user a créée cette sauce
     Sauce.findOne({ _id: req.params.id })
         .then(sauce => {
             const filename = sauce.imageUrl.split('/images/')[1];
@@ -73,10 +74,12 @@ exports.deleteSauce = (req, res, next) => {
             fs.unlink(`images/${filename}`, () => {
                 // Supprimer la sauce
                 Sauce.deleteOne({ _id: req.params.id })
-                    .then(() => res.status(200).json({ 
-                        message: 'Sauce supprimée avec succès' }))
-                    .catch(error => res.status(401).json({ 
-                        message: "Vous n'avez pas l'autorisation nécessaire pour supprimer cette sauce" }))
+                    .then(() => res.status(200).json({
+                        message: 'Sauce supprimée avec succès'
+                    }))
+                    .catch(error => res.status(401).json({
+                        message: "Vous n'avez pas l'autorisation nécessaire pour supprimer cette sauce"
+                    }))
             });
 
         })
