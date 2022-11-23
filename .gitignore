@@ -6,6 +6,8 @@
 /out-tsc
 /bazel-out
 
+/images
+
 # Node
 /node_modules
 node_modules
